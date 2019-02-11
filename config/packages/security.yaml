@@ -1,6 +1,10 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+     App\Entity\User: bcrypt
     providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
         in_memory: { memory: ~ }
     firewalls:
         dev:
@@ -8,6 +12,10 @@ security:
             security: false
         main:
             anonymous: true
+            logout: ~
+            logout_on_user_change: true
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
 
             # activate different ways to authenticate
 
