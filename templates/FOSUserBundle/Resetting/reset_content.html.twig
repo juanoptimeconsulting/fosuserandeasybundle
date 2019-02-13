@@ -1,0 +1,35 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<section class="bgi bgi_login" style="background-image: url({{ asset('uploads/images/background/bg_login.jpg') }})">
+    <div class="container box_login">
+        <div class="row align-items-center">
+            <div class="col-12 col-sm-9 col-lg-5">
+                <div class="box_logo text-center mb-5">
+                    <span class="logo logo_optstock"></span>
+                </div>
+                <div class="box_login--form pd_box--50 border_box border_box--darkgray border_box--slim mb-5">
+                    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset form-signin form_login' } }) }}
+                    <div class="form-group mb-4">
+                        {{ form_label(form.plainPassword.first, null, { 'label_attr': {'class': 'text-white h5'} }) }}
+                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control','minlength': 8, 'maxlength':16}}) }}
+                        {{ form_errors(form.plainPassword.first) }}
+                    </div>
+                    <div class="form-group mb-4">
+                        {{ form_label(form.plainPassword.second, null, { 'label_attr': {'class': 'text-white h5'} }) }}
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control','minlength': 8, 'maxlength':16}}) }}
+                        {{ form_errors(form.plainPassword.second) }}
+                    </div>
+                    <div class="form-group mb-4">
+                        <button type="submit" id="_submit" name="_submit"
+                                class="btn btn_cyan btn-lg btn-block">{{ 'resetting.reset.submit'|trans }}</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <div class="box_powerby text-center">
+                    <span class="d-block text_gray--footer font-weight-bold h6 mb-5">© 2019 Optime Consulting. All Rights Reserved.</span>
+                    <span class="d-block logo logo_powerby--max"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
