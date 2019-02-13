@@ -1,0 +1,46 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% set image = (app.request.attributes.get('background') is not null) ? "background-image: url('../uploads/images/background/" ~ app.request.attributes.get("background") ~ "')" : "" %}
+{% if error %}
+    <div class="d-none" id="loginError">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<section class="bgi bgi_login" style="{{ image }}">
+    <div class="container-fluid box_login">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <div class="d-inline-flex flex-column box_login_col">
+                    <div class="box_logo text-center mb-5">
+                        <span class="logo logo_optstock logo_optstock--max"></span>
+                    </div>
+                    <div class="box_login--form pd_box--50 border_box border_box--login border_box--slim mb-5">
+
+                        <form class="form_login" action="{{ path("fos_user_security_check") }}" method="post">
+                            {% if csrf_token %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                            {% endif %}
+                            <div class="form-group mb-4">
+                                <label class="text-white h5" for="username">{{ 'security.login.username'|trans }}</label>
+                                <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="text-white h5" for="password">{{ 'security.login.password'|trans }}</label>
+                                <input type="password" class="form-control" id="password" name="_password" required="required" autocomplete="current-password" />
+                            </div>
+                            <div class="form-group form-check mb-4">
+                                <input type="checkbox" class="form-check-input align-bottom mg-t-5" id="remember_me" name="_remember_me"/>
+                                <label class="form-check-label ml-2 align-middle text-white h5" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                            </div>
+                            <div class="form-group mb-4">
+                                <button class="btn btn_cyan btn-lg btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"> Sign In</button>
+                            </div>
+                            <span class="d-block text-white h6 mt-2">Forgot your <a class="btn_forgot" href="{{ path('fos_user_resetting_request') }}">password?</a></span>
+                        </form>
+                    </div>
+                    <div class="box_powerby text-center">
+                        <span class="d-block text_gray--footer font-weight-bold h6 mb-5">© {{ app.request.attributes.get('year') }} Optime Consulting. All Rights Reserved.</span>
+                        <span class="d-block logo logo_powerby--max"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,22 @@
+{% extends 'base_login.html.twig' %}
+
+{% block body %}
+
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script !src="">
+        if ($('div#loginError').text() !== '') {
+            swal({
+                title: 'Error',
+                text: $('div#loginError').text(),
+                icon: 'error',
+                timer: 1500,
+                buttons: false
+            });
+        }
+    </script>
+{% endblock %}
